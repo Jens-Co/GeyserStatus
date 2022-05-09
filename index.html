@@ -30,7 +30,7 @@
 	var tso = document.getElementById("test");
 	var ao = document.getElementById("api");
 
-	fetch('https://api.geysermc.org/health')
+	fetch('https://api.geysermc.org/health', {mode: "no-cors"})
 	.then(
 		function(response) {
 		if (response.status !== 200) {
@@ -46,7 +46,7 @@
 		} 
 	});
 
-	fetch('https://api.mcsrvstat.us/bedrock/simple/link.geysermc.org')
+	fetch('https://api.mcsrvstat.us/bedrock/simple/link.geysermc.org', {mode: "no-cors"})
 	.then(
 		function(response) {
 		if (response.status !== 200) {
@@ -61,7 +61,7 @@
 			ao.style.border = "thin solid #03fc0b";
 		} 
 	});
-	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org')
+	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org', {mode: "no-cors"})
 	.then(
 		function(response) {
 		if (response.status !== 200) {
