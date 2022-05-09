@@ -29,36 +29,6 @@
 	var gso = document.getElementById("gls");
 	var tso = document.getElementById("test");
 	var ao = document.getElementById("api");
-	MinecraftAPI.getServerStatus("link.geysermc.org", {
-		port: 19132
-		}, 
-		function (err, status) {
-			if (err) {
-				return document.querySelector('.gls-server-status').innerHTML = 'Error loading status';
-			}
-		document.querySelector('.gls-server-online').innerHTML = status.online ? 'online' : 'offline';
-		if (status.online === true) {
-			gso.style.border = "thin solid #03fc0b";
-		} else {
-			gso.style.border = "thin solid #d40202";
-		}
-	});
-	//ping test server
-	MinecraftAPI.getServerStatus("test.geysermc.org", {
-		port: 25565
-		}, 
-		function (err, status) {
-			if (err) {
-				return document.querySelector('.test-server-status').innerHTML = 'Error loading status';
-			}
-		document.querySelector('.test-server-online').innerHTML = status.online ? 'online' : 'offline';
-		if (status.online === true) {
-			tso.style.border = "thin solid #03fc0b";
-		} else {
-			tso.style.border = "thin solid #d40202";
-		}
-	});
-	//ping Geyser api
 
 	fetch('https://api.geysermc.org/health')
 	.then(
@@ -76,18 +46,33 @@
 		} 
 	});
 
+	fetch('https://api.mcsrvstat.us/bedrock/simple/link.geysermc.org')
+	.then(
+		function(response) {
+		if (response.status !== 200) {
+			console.log('Could not connect to website ' +
+			response.status);
+			document.querySelector('.gls-server-online').innerHTML = 'offline';
+			ao.style.border = "thin solid #d40202";
+			return;
+		}
+		if (response.ok === true) {
+			document.querySelector('.gls-server-online').innerHTML = 'online';
+			ao.style.border = "thin solid #03fc0b";
+		} 
+	});
 	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org')
 	.then(
 		function(response) {
 		if (response.status !== 200) {
 			console.log('Could not connect to website ' +
 			response.status);
-			document.querySelector('.api-online').innerHTML = 'offline';
+			document.querySelector('.test-server-online').innerHTML = 'offline';
 			ao.style.border = "thin solid #d40202";
 			return;
 		}
 		if (response.ok === true) {
-			document.querySelector('.api-online').innerHTML = 'online';
+			document.querySelector('.test-server-online').innerHTML = 'online';
 			ao.style.border = "thin solid #03fc0b";
 		} 
 	});
