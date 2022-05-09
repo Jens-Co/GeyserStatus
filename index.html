@@ -46,34 +46,34 @@
 		} 
 	});
 
-	fetch('https://api.mcsrvstat.us/bedrock/simple/link.geysermc.org')
+	fetch('https://eu.mc-api.net/v3/server/ping/link.geysermc.org')
 	.then(
 		function(response) {
 		if (response.status !== 200) {
 			console.log('Could not connect to website ' +
 			response.status);
 			document.querySelector('.gls-server-online').innerHTML = 'offline';
-			ao.style.border = "thin solid #d40202";
+			gso.style.border = "thin solid #d40202";
 			return;
 		}
 		if (response.ok === true) {
 			document.querySelector('.gls-server-online').innerHTML = 'online';
-			ao.style.border = "thin solid #03fc0b";
+			gso.style.border = "thin solid #03fc0b";
 		} 
 	});
-	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org')
+	fetch('https://eu.mc-api.net/v3/server/ping/test.geysermc.org')
 	.then(
 		function(response) {
 		if (response.status !== 200) {
 			console.log('Could not connect to website ' +
 			response.status);
 			document.querySelector('.test-server-online').innerHTML = 'offline';
-			ao.style.border = "thin solid #d40202";
+			tso.style.border = "thin solid #d40202";
 			return;
 		}
 		if (response.ok === true) {
 			document.querySelector('.test-server-online').innerHTML = 'online';
-			ao.style.border = "thin solid #03fc0b";
+			tso.style.border = "thin solid #03fc0b";
 		} 
 	});
 </script>
