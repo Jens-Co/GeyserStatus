@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -58,6 +59,23 @@
 		}
 	});
 	//ping Geyser api
+
+	fetch('https://api.geysermc.org/health')
+	.then(
+		function(response) {
+		if (response.status !== 200) {
+			console.log('Could not connect to website ' +
+			response.status);
+			document.querySelector('.api-online').innerHTML = 'offline';
+			ao.style.border = "thin solid #d40202";
+			return;
+		}
+		if (response.ok === true) {
+			document.querySelector('.api-online').innerHTML = 'online';
+			ao.style.border = "thin solid #03fc0b";
+		} 
+	});
+
 	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org')
 	.then(
 		function(response) {
