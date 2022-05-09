@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="status">
+		<div id="gls" class="gls-server-status">
+			Global linking server is: <span class="gls-server-online"></span>
+		</div>
+		<div id="test" class="test-server-status">
+			Geyser Test server is: <span class="test-server-online"></span>		
+		</div>
+		<div id="api" class="api-status">
+			Geyser API is: <span class="api-online"></span>	
+		</div>
+	</div>
+</body>
+</html>
+
+<script src="https://mcapi.us/scripts/minecraft.min.js"></script>
+<script>
+	//ping global linking server
+	var gso = document.getElementById("gls");
+	var tso = document.getElementById("test");
+	var ao = document.getElementById("api");
+	MinecraftAPI.getServerStatus("link.geysermc.org", {
+		port: 19132
+		}, 
+		function (err, status) {
+			if (err) {
+				return document.querySelector('.gls-server-status').innerHTML = 'Error loading status';
+			}
+		document.querySelector('.gls-server-online').innerHTML = status.online ? 'online' : 'offline';
+		if (status.online === true) {
+			gso.style.border = "thin solid #03fc0b";
+		} else {
+			gso.style.border = "thin solid #d40202";
+		}
+	});
+	//ping test server
+	MinecraftAPI.getServerStatus("test.geysermc.org", {
+		port: 25565
+		}, 
+		function (err, status) {
+			if (err) {
+				return document.querySelector('.test-server-status').innerHTML = 'Error loading status';
+			}
+		document.querySelector('.test-server-online').innerHTML = status.online ? 'online' : 'offline';
+		if (status.online === true) {
+			tso.style.border = "thin solid #03fc0b";
+		} else {
+			tso.style.border = "thin solid #d40202";
+		}
+	});
+	//ping Geyser api
+	fetch('https://api.mcsrvstat.us/bedrock/simple/test.geysermc.org')
+	.then(
+		function(response) {
+		if (response.status !== 200) {
+			console.log('Could not connect to website ' +
+			response.status);
+			document.querySelector('.api-online').innerHTML = 'offline';
+			ao.style.border = "thin solid #d40202";
+			return;
+		}
+		if (response.ok === true) {
+			document.querySelector('.api-online').innerHTML = 'online';
+			ao.style.border = "thin solid #03fc0b";
+		} 
+	});
+</script>
