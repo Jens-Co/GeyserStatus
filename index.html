@@ -41,7 +41,7 @@
   var us = document.getElementById("usserver");
   var eu = document.getElementById("euserver");
 
-  const url = ["test.geysermc.org", "link.geysermc.org", "eu.geyserconnect.net", "us.geyserconnect.net"];
+  const url = ["test.geysermc.org", "link.geysermc.org", "euw.geyserconnect.net", "usa.geyserconnect.net"];
   url.forEach((host) => {
     $(document).ready(() => {
       $.getJSON("https://api.mcsrvstat.us/bedrock/2/" + host, (status) => {
@@ -63,21 +63,21 @@
             document.querySelector('.us-server-online').innerHTML = "Online";
           }
         } else {
-          if (host.includes("test")) {
+          if (status.hostname.includes("test") && status.online === false) {
             tso.style.border = "thin solid #d40202";
-            document.querySelector('.test-server-online').innerHTML = "offline";
+            document.querySelector('.test-server-online').innerHTML = "Offline";
           }
-          if (host.includes("link")) {
+          if (status.hostname.includes("link") && status.online === false) {
             gso.style.border = "thin solid #d40202";
-            document.querySelector('.gls-server-online').innerHTML = "offline";
+            document.querySelector('.gls-server-online').innerHTML = "Offline";
           }
-          if (host.includes("eu")) {
+          if (status.hostname.includes("eu") && status.online === false) {
             eu.style.border = "thin solid #d40202";
-            document.querySelector('.eu-server-online').innerHTML = "offline";
+            document.querySelector('.eu-server-online').innerHTML = "Offline";
           }
-          if (host.includes("us")) {
+          if (status.hostname.includes("us") && status.online === false) {
             us.style.border = "thin solid #d40202";
-            document.querySelector('.us-server-online').innerHTML = "offline";
+            document.querySelector('.us-server-online').innerHTML = "Offline";
           }
         }
       });
@@ -90,12 +90,12 @@
         if (response.status !== 200) {
           console.log('Could not connect to website ' +
             response.status);
-          document.querySelector('.api-online').innerHTML = 'offline';
+          document.querySelector('.api-online').innerHTML = 'Offline';
           ao.style.border = "thin solid #d40202";
           return;
         }
         if (response.ok === true) {
-          document.querySelector('.api-online').innerHTML = 'online';
+          document.querySelector('.api-online').innerHTML = 'Online';
           ao.style.border = "thin solid #03fc0b";
         }
       });
