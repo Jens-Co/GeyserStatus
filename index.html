@@ -32,6 +32,10 @@
     </div>
   </div>
 </body>
+<footer>
+  <p>© 2022 GeyserMC All Rights Reserved</p>
+  <p><a href="https://geysermc.org">GeyserMC website</a></p>
+</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -48,40 +52,40 @@
         // test server ping
         if (status.hostname.includes("test")) {
           if (status.debug.query === true) {
-            ts.style.border = "thin solid #03fc0b";
+            ts.style.border = "solid #03fc0b";
             document.querySelector('.test-server-online').innerHTML = "Online";
           } else {
-            ts.style.border = "thin solid #d40202";
+            ts.style.border = "solid #d40202";
             document.querySelector('.test-server-online').innerHTML = "Offline";
           }
         }
         // link server ping 
         if (status.hostname.includes("link")) {
           if (status.debug.query === true) {
-            gl.style.border = "thin solid #03fc0b";
+            gl.style.border = "solid #03fc0b";
             document.querySelector('.gls-server-online').innerHTML = "Online";
           } else {
-            gl.style.border = "thin solid #d40202";
+            gl.style.border = "solid #d40202";
             document.querySelector('.gls-server-online').innerHTML = "Offline";
           }
         }
         // gc eu server ping
         if (status.hostname.includes("eu")) {
           if (status.debug.query === true) {
-            eu.style.border = "thin solid #03fc0b";
+            eu.style.border = "solid #03fc0b";
             document.querySelector('.eu-server-online').innerHTML = "Online";
           } else {
-            eu.style.border = "thin solid #d40202";
+            eu.style.border = "solid #d40202";
             document.querySelector('.eu-server-online').innerHTML = "Offline";
           }
         }
         // gc eu server ping
         if (status.hostname.includes("us")) {
           if (status.debug.query === true) {
-            us.style.border = "thin solid #03fc0b";
+            us.style.border = "solid #03fc0b";
             document.querySelector('.us-server-online').innerHTML = "Online";
           } else {
-            us.style.border = "thin solid #d40202";
+            us.style.border = "solid #d40202";
             document.querySelector('.us-server-online').innerHTML = "Offline";
           }
         }
@@ -94,10 +98,10 @@
     url: "https://api.geysermc.org/health"
   }).done(function (result) {
     document.querySelector('.api-online').innerHTML = 'Online';
-    api.style.border = "thin solid #03fc0b";
+    api.style.border = "solid #03fc0b";
   }).fail(function () {
     document.querySelector('.api-online').innerHTML = 'Offline';
-    api.style.border = "thin solid #d40202";
+    api.style.border = "solid #d40202";
   });
 </script>
 

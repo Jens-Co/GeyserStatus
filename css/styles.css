@@ -1,18 +1,37 @@
 body {
 	margin: 0;
-	background: #0d1117;
+	background: #161b22;
 	color: white;
 	font-family: open sans, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
-    font-size: 2rem;
+    font-size: 110%;
     font-weight: 400;
 }
+footer {
+  margin: 0;
+  text-align: center;
+  color: white;
+	font-family: open sans, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+    font-size: 1rem;
+    font-weight: 100;
+}
+hr {
+  margin-top: 30px;
+}
+a {
+  color: white;
+  text-decoration: underline;
+}
 .status {
+  background: #0d1117;
 	text-align: center;
 	margin: auto;
-	padding: 10px;
+	padding: 100px;
 	padding-top: 10px;
-	padding-bottom: 30px;
-	width: 500px;
+	padding-bottom: 50px;
+	width: 550px;
+  border-radius: 10px;
+  border-style: groove;
+  height: 90%;
 }
 .gls-server-status {
 	margin-top: 20px;
