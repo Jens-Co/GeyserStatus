@@ -2,108 +2,103 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/styles.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <div class="status">
-    <img src="assets/geyser.png" alt="GeyserLogo" class="logo">
-    <h3>Geyser Services</h3>
-    <div id="gls" class="gls-server-status">
-      Global linking is: <span class="gls-server-online"></span>
-    </div>
-    <div id="api" class="api-status">
-      Geyser API is: <span class="api-online"></span>
-    </div>
-    <hr>
-    <h3>Geyser servers</h3>
-    <div id="test" class="test-server-status">
-      Geyser test server is: <span class="test-server-online"></span>
-    </div>
-    <div id="euserver" class="eu-server-status">
-      GeyserConnect EU server is: <span class="eu-server-online"></span>
-    </div>
-    <div id="usserver" class="us-server-status">
-      GeyserConnect US server is: <span class="us-server-online"></span>
-    </div>
-  </div>
+	<div class="status">
+		<img src="assets/geyser.png" alt="GeyserLogo" class="logo">
+		<h3>Geyser Services</h3>
+		<div id="gls" class="gls-server-status">
+			Global linking: <span class="gls-server-online"></span>
+		</div>
+		<div id="api" class="api-status">
+			Geyser API: <span class="api-online"></span>
+		</div>
+		<hr>
+		<h3>Geyser Servers</h3>
+		<div id="test" class="test-server-status">
+			Geyser test server: <span class="test-server-online"></span>
+		</div>
+		<div id="euserver" class="eu-server-status">
+			GeyserConnect EU server: <span class="eu-server-online"></span>
+		</div>
+		<div id="usserver" class="us-server-status">
+			GeyserConnect US server: <span class="us-server-online"></span>
+		</div>
+	</div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-  var gso = document.getElementById("gls");
-  var tso = document.getElementById("test");
-  var ao = document.getElementById("api");
-  var us = document.getElementById("usserver");
-  var eu = document.getElementById("euserver");
+	var gl = document.getElementById("gls");
+	var ts = document.getElementById("test");
+	var api = document.getElementById("api");
+	var us = document.getElementById("usserver");
+	var eu = document.getElementById("euserver");
 
-  const url = ["test.geysermc.org", "link.geysermc.org", "euw.geyserconnect.net", "usa.geyserconnect.net"];
-  url.forEach((host) => {
-    $(document).ready(() => {
-      $.getJSON("https://api.mcsrvstat.us/bedrock/2/" + host, (status) => {
-        // test server ping
-        if (status.hostname.includes("test")) {
-          if (status.debug.query === true) {
-            tso.style.border = "thin solid #03fc0b";
-            document.querySelector('.test-server-online').innerHTML = "Online";
-          } else {
-            tso.style.border = "thin solid #d40202";
-            document.querySelector('.test-server-online').innerHTML = "Offline";
-          }
-        }
-        // link server ping 
-        if (status.hostname.includes("link")) {
-          if (status.debug.query === true) {
-            gso.style.border = "thin solid #03fc0b";
-            document.querySelector('.gls-server-online').innerHTML = "Online";
-          } else {
-            gso.style.border = "thin solid #d40202";
-            document.querySelector('.gls-server-online').innerHTML = "Offline";
-          }
-        }
+	const url = ["test.geysermc.org", "link.geysermc.org", "euw.geyserconnect.net", "usa.geyserconnect.net"];
+	url.forEach((host) => {
+		$(document).ready(() => {
+			$.getJSON("https://api.mcsrvstat.us/bedrock/2/" + host, (status) => {
+				// test server ping
+				if (status.hostname.includes("test")) {
+					if (status.debug.query === true) {
+						ts.style.border = "thin solid #03fc0b";
+						document.querySelector('.test-server-online').innerHTML = "Online";
+					} else {
+						ts.style.border = "thin solid #d40202";
+						document.querySelector('.test-server-online').innerHTML = "Offline";
+					}
+				}
+				// link server ping 
+				if (status.hostname.includes("link")) {
+					if (status.debug.query === true) {
+						gl.style.border = "thin solid #03fc0b";
+						document.querySelector('.gls-server-online').innerHTML = "Online";
+					} else {
+						gl.style.border = "thin solid #d40202";
+						document.querySelector('.gls-server-online').innerHTML = "Offline";
+					}
+				}
+				// gc eu server ping
+				if (status.hostname.includes("eu")) {
+					if (status.debug.query === true) {
+						eu.style.border = "thin solid #03fc0b";
+						document.querySelector('.eu-server-online').innerHTML = "Online";
+					} else {
+						eu.style.border = "thin solid #d40202";
+						document.querySelector('.eu-server-online').innerHTML = "Offline";
+					}
+				}
         // gc eu server ping
-        if (status.hostname.includes("eu")) {
-          if (status.debug.query === true) {
-            eu.style.border = "thin solid #03fc0b";
-            document.querySelector('.eu-server-online').innerHTML = "Online";
-          } else {
-            eu.style.border = "thin solid #d40202";
-            document.querySelector('.eu-server-online').innerHTML = "Offline";
-          }
-        }
-        // gc eu server ping
-        if (status.hostname.includes("us")) {
-          if (status.debug.query === true) {
-            us.style.border = "thin solid #03fc0b";
-            document.querySelector('.us-server-online').innerHTML = "Online";
-          } else {
-            us.style.border = "thin solid #d40202";
-            document.querySelector('.us-server-online').innerHTML = "Offline";
-          }
-        }
-      });
+				if (status.hostname.includes("us")) {
+					if (status.debug.query === true) {
+						us.style.border = "thin solid #03fc0b";
+						document.querySelector('.us-server-online').innerHTML = "Online";
+					} else {
+						us.style.border = "thin solid #d40202";
+						document.querySelector('.us-server-online').innerHTML = "Offline";
+					}
+				}
+			});
+		});
+	});
+	// skins api ping
+    $.ajax({
+        type: "GET",
+        url: "https://api.geysermc.org/health"
+    }).done(function (result) {
+		document.querySelector('.api-online').innerHTML = 'Online';
+		api.style.border = "thin solid #03fc0b";
+    }).fail(function () {
+		document.querySelector('.api-online').innerHTML = 'Offline';
+		api.style.border = "thin solid #d40202";
     });
-  });
-  // skins api ping
-  fetch('https://api.geysermc.org/health')
-    .then(
-      function (response) {
-        if (response.status !== 200) {
-          console.log('Could not connect to website ' +
-            response.status);
-          document.querySelector('.api-online').innerHTML = 'Offline';
-          ao.style.border = "thin solid #d40202";
-          return;
-        }
-        if (response.ok === true) {
-          document.querySelector('.api-online').innerHTML = 'Online';
-          ao.style.border = "thin solid #03fc0b";
-        }
-      });
 </script>
 
 </html>
