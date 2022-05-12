@@ -1,5 +1,5 @@
 body {
-	margin: 0;
+	margin-top: 3%;
 	background: #161b22;
 	color: white;
 	font-family: open sans, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
@@ -7,7 +7,6 @@ body {
     font-weight: 400;
 }
 footer {
-  margin: 0;
   text-align: center;
   color: white;
 	font-family: open sans, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
@@ -21,6 +20,10 @@ a {
   color: white;
   text-decoration: underline;
 }
+img {
+  width: 50%;
+  height: 50%;
+}
 .status {
   background: #0d1117;
 	text-align: center;
@@ -28,7 +31,7 @@ a {
 	padding: 100px;
 	padding-top: 10px;
 	padding-bottom: 50px;
-	width: 550px;
+	width: 60%;
   border-radius: 10px;
   border-style: groove;
   height: 90%;
@@ -74,4 +77,8 @@ a {
 	padding-bottom: 10px;
 	border-style: solid;
 	border-radius: 10px;
+}
+.pingtime {
+  margin-top: 20px;
+  color: white;
 }

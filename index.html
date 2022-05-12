@@ -30,7 +30,11 @@
     <div id="usserver" class="us-server-status">
       GeyserConnect US server: <span class="us-server-online"></span>
     </div>
+    <div class="pingtime">
+      Last pinged: <span class="current-time"></span>
+    </div>
   </div>
+
 </body>
 <footer>
   <p>© 2022 GeyserMC All Rights Reserved</p>
@@ -39,70 +43,78 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-  var gl = document.getElementById("gls");
-  var ts = document.getElementById("test");
-  var api = document.getElementById("api");
-  var us = document.getElementById("usserver");
-  var eu = document.getElementById("euserver");
+  function foo() {
+    var gl = document.getElementById("gls");
+    var ts = document.getElementById("test");
+    var api = document.getElementById("api");
+    var us = document.getElementById("usserver");
+    var eu = document.getElementById("euserver");
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes();
 
-  const url = ["test.geysermc.org", "link.geysermc.org", "euw.geyserconnect.net", "usa.geyserconnect.net"];
-  url.forEach((host) => {
-    $(document).ready(() => {
-      $.getJSON("https://api.mcsrvstat.us/bedrock/2/" + host, (status) => {
-        // test server ping
-        if (status.hostname.includes("test")) {
-          if (status.debug.query === true) {
-            ts.style.border = "solid #03fc0b";
-            document.querySelector('.test-server-online').innerHTML = "Online";
-          } else {
-            ts.style.border = "solid #d40202";
-            document.querySelector('.test-server-online').innerHTML = "Offline";
+    const url = ["test.geysermc.org", "link.geysermc.org", "euw.geyserconnect.net", "usa.geyserconnect.net"];
+
+    url.forEach((host) => {
+      $(document).ready(() => {
+        $.getJSON("https://api.mcsrvstat.us/bedrock/2/" + host, (status) => {
+          // test server ping
+          if (status.hostname.includes("test")) {
+            if (status.debug.query === true) {
+              ts.style.border = "solid #03fc0b";
+              document.querySelector('.test-server-online').innerHTML = "Online";
+            } else {
+              ts.style.border = "solid #d40202";
+              document.querySelector('.test-server-online').innerHTML = "Offline";
+            }
           }
-        }
-        // link server ping 
-        if (status.hostname.includes("link")) {
-          if (status.debug.query === true) {
-            gl.style.border = "solid #03fc0b";
-            document.querySelector('.gls-server-online').innerHTML = "Online";
-          } else {
-            gl.style.border = "solid #d40202";
-            document.querySelector('.gls-server-online').innerHTML = "Offline";
+          // link server ping 
+          if (status.hostname.includes("link")) {
+            if (status.debug.query === true) {
+              gl.style.border = "solid #03fc0b";
+              document.querySelector('.gls-server-online').innerHTML = "Online";
+            } else {
+              gl.style.border = "solid #d40202";
+              document.querySelector('.gls-server-online').innerHTML = "Offline";
+            }
           }
-        }
-        // gc eu server ping
-        if (status.hostname.includes("eu")) {
-          if (status.debug.query === true) {
-            eu.style.border = "solid #03fc0b";
-            document.querySelector('.eu-server-online').innerHTML = "Online";
-          } else {
-            eu.style.border = "solid #d40202";
-            document.querySelector('.eu-server-online').innerHTML = "Offline";
+          // gc eu server ping
+          if (status.hostname.includes("eu")) {
+            if (status.debug.query === true) {
+              eu.style.border = "solid #03fc0b";
+              document.querySelector('.eu-server-online').innerHTML = "Online";
+            } else {
+              eu.style.border = "solid #d40202";
+              document.querySelector('.eu-server-online').innerHTML = "Offline";
+            }
           }
-        }
-        // gc eu server ping
-        if (status.hostname.includes("us")) {
-          if (status.debug.query === true) {
-            us.style.border = "solid #03fc0b";
-            document.querySelector('.us-server-online').innerHTML = "Online";
-          } else {
-            us.style.border = "solid #d40202";
-            document.querySelector('.us-server-online').innerHTML = "Offline";
+          // gc eu server ping
+          if (status.hostname.includes("us")) {
+            if (status.debug.query === true) {
+              us.style.border = "solid #03fc0b";
+              document.querySelector('.us-server-online').innerHTML = "Online";
+            } else {
+              us.style.border = "solid #d40202";
+              document.querySelector('.us-server-online').innerHTML = "Offline";
+            }
           }
-        }
+        });
       });
     });
-  });
-  // skins api ping
-  $.ajax({
-    type: "GET",
-    url: "https://api.geysermc.org/health"
-  }).done(function (result) {
-    document.querySelector('.api-online').innerHTML = 'Online';
-    api.style.border = "solid #03fc0b";
-  }).fail(function () {
-    document.querySelector('.api-online').innerHTML = 'Offline';
-    api.style.border = "solid #d40202";
-  });
+    // skins api ping
+    $.ajax({
+      type: "GET",
+      url: "https://api.geysermc.org/health"
+    }).done(function (result) {
+      document.querySelector('.api-online').innerHTML = 'Online';
+      api.style.border = "solid #03fc0b";
+    }).fail(function () {
+      document.querySelector('.api-online').innerHTML = 'Offline';
+      api.style.border = "solid #d40202";
+    });
+    document.querySelector('.current-time').innerHTML = time;
+    setTimeout(foo, 60000);
+  }
+  foo();
 </script>
 
 </html>
